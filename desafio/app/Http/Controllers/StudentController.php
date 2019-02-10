@@ -29,19 +29,25 @@ class StudentController extends Controller
         $data['regional'][$regional] = 0;
 
         foreach ($allStudentsActives as $key => $student) {
+
             if ($key == $qtdActives -1){
                 $data['regional'][$regional] += 1;
                 $data['regional'][$regional] = ($data['regional'][$regional]/$qtdAll)*100;
                 break;
             }
-            if ($student->regional === $regional) {
+
+            if ($student->regional === $regional){
                 $data['regional'][$regional] += 1;
                 continue;
             }
 
-            $data['regional'][$regional] = ($data['regional'][$regional]/$qtdAll)*100;
-            $regional = $student->regional;
-            $data['regional'][$regional] = 0;
+            if ($student->regional !== $regional) {
+                $data['regional'][$regional] = ($data['regional'][$regional]/$qtdAll)*100;
+                $regional = $student->regional;
+                $data['regional'][$regional] = 0;
+                $data['regional'][$regional] += 1;
+            }
+
         }
         return response()->json($data);
     }

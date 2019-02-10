@@ -28,7 +28,7 @@ class Alternative extends Model
     public function answers()
     {
 
-         return $this->hasOne(Answers::class, 'student_id');
+         return $this->hasOne(Answers::class);
 
     }
 

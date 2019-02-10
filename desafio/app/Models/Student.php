@@ -32,7 +32,7 @@ class Student extends Model
     public function answers()
     {
 
-         return $this->hasMany(Answers::class, 'student_id');
+         return $this->hasMany(Answers::class);
 
     }
 
