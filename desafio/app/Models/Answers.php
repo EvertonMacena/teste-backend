@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Alternative;
+use App\Models\Question;
+use App\Models\Student;
+
 class Answers extends Model
 {
 
@@ -28,21 +32,21 @@ class Answers extends Model
     public function student ()
     {
 
-        return $this->belongsTo('App\Models\Student');
+        return $this->belongsTo(Student::class);
 
     }
 
     public function question ()
     {
 
-        return $this->belongsTo('App\Models\Question');
+        return $this->belongsTo(Question::class);
 
     }
 
-    public function alternative ()
+    public function alternative()
     {
 
-        return $this->belongsTo('App\Models\Alternative');
+        return $this->belongsTo(Alternative::class);
 
     }
 

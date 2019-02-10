@@ -25,5 +25,12 @@ class Alternative extends Model
      */
     protected $hidden = [];
 
+    public function answers()
+    {
+
+         return $this->hasOne(Answers::class, 'student_id');
+
+    }
+
 
 }

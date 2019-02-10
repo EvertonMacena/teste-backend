@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Answers;
+
+use Illuminate\Support\Facades\DB;
 
 class Student extends Model
 {
@@ -29,14 +32,22 @@ class Student extends Model
     public function answers()
     {
 
-         return $this->hasMany('App\Models\Answers');
+         return $this->hasMany(Answers::class, 'student_id');
 
     }
 
-     public function getAllAverageAttribute($value)
+    public static function getStudentsActives()
     {
 
-        return ucfirst($value);
+        $allAnswers =DB::table('answers')
+            ->join('students', 'answers.student_id', '=', 'students.id')
+            ->join('alternatives', 'answers.alternative_id', '=', 'alternatives.id')
+            ->select('students.*')
+            ->where('alternatives.description', 'Sim')
+            ->orderBy('students.regional')
+            ->get();
 
+        return $allAnswers;
     }
+
 }
